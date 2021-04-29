@@ -11,7 +11,7 @@ function App() {
       <Header />
       <div className="container">
         <Switch>
-          <Route path="/create-event" component={CreateEvent}></Route>
+          <Route exact path="/create-event" component={CreateEvent}></Route>
           <Route path="/events" component={Events}></Route>
         </Switch>
       </div>
