@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "bootstrap/js/dist/dropdown";
-import "./Header.sass";
 import { NavDropdown } from "react-bootstrap";
+import "./Header.sass";
 function Header() {
   return (
     <div className="header">
@@ -21,7 +20,23 @@ function Header() {
             >
               <NavDropdown.Item href="/приход">Приход</NavDropdown.Item>
               <NavDropdown.Item href="/расход">Расход</NavDropdown.Item>
-              <NavDropdown.Item href="/отчет">Отчет</NavDropdown.Item>
+
+              <NavDropdown
+                drop="right"
+                title="Отчет"
+                id="basic-nav-dropdown-right"
+                className="header__dropdown-right"
+              >
+                <NavDropdown.Item href="/приход по мероприятиям">
+                  Приход по мероприятиям
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/расход по мероприятиям">
+                  Расход по мероприятиям
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/общие сведения по мероприятиям">
+                  Общие сведения по мероприятиям
+                </NavDropdown.Item>
+              </NavDropdown>
             </NavDropdown>
           </div>
           <div className="header__group">
