@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import { instance } from "../../../api/api";
 import { SEND_EVENT } from "./../../../store/reducers/createEvent-reducer";
 import "./CreateEvent.sass";
 
@@ -37,14 +38,9 @@ const EventForm = ({ handleSubmit }) => {
         ></Field>
       </Form.Group>
 
-      <div className="create-event__buttons">
-        <Button variant="success" type="submit">
-          Сохранить
-        </Button>
-        <Button variant="danger" type="submit">
-          Отмена
-        </Button>
-      </div>
+      <Button variant="success" type="submit">
+        Отправить
+      </Button>
     </Form>
   );
 };
@@ -54,6 +50,7 @@ function CreateEvent() {
 
   const saveForm = (event) => {
     dispatch({ type: SEND_EVENT, event });
+    instance.post("/events.json", event);
   };
   return (
     <div className="create-event">
