@@ -2,7 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import CreateEvent from "./components/Events/CreateEvent/CreateEvent";
 import Events from "./components/Events/Events";
 import Header from "./components/Header/Header";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/base.sass";
 
 function App() {
