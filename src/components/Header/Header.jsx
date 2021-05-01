@@ -8,10 +8,10 @@ function Header() {
       <div className="container">
         <div className="header__menu">
           <div className="header__group">
-            <Link to="events" className="header__link">
+            <Link to="/events" className="header__link">
               Мероприятия
             </Link>
-            <Link to="users" className="header__link">
+            <Link to="/users" className="header__link">
               Пользователи
             </Link>
             <NavDropdown
@@ -40,7 +40,7 @@ function Header() {
             </NavDropdown>
           </div>
           <div className="header__group">
-            <Link to="language" className="header__link">
+            <Link to="/language" className="header__link">
               Язык
             </Link>
             <button className="btn btn-primary">Sign in</button>
