@@ -11,7 +11,7 @@ function FullEvent() {
     instance
       .get(`events/${id}.json`)
       .then(({ data }) => setData(data))
-      // .then(() => setIsLoading(false));
+      .then(() => setIsLoading(false));
   }, []);
   return (
     <div>
