@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router";
 import { instance } from "../../../api/api";
+import Preloader from "../../UI/Preloader/Preloader";
 
 function FullEvent() {
   const { id } = useParams();
@@ -11,14 +11,12 @@ function FullEvent() {
     instance
       .get(`events/${id}.json`)
       .then(({ data }) => setData(data))
-      .then(() => setIsLoading(false));
+      // .then(() => setIsLoading(false));
   }, []);
   return (
     <div>
       {isLoading ? (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
+        <Preloader />
       ) : (
         <div className="fullEvent">{data.nameEvent}</div>
       )}
