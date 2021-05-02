@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Field, reduxForm } from "redux-form";
@@ -46,11 +46,18 @@ const EventForm = ({ handleSubmit }) => {
 };
 const EventReduxForm = reduxForm({ form: "eventForm" })(EventForm);
 function CreateEvent() {
+  const [event, setEvent] = useState({
+    nameEvent: "",
+    startTime: "",
+    endTime: "",
+    status: "active",
+    numberEvent: 0,
+  });
   const dispatch = useDispatch();
-
-  const saveForm = (event) => {
-    dispatch({ type: SEND_EVENT, event });
-    instance.post("/events.json", event);
+  const saveForm = (values) => {
+    setEvent({ ...event, ...values });
+    dispatch({ type: SEND_EVENT, values });
+    return () => instance.post("/events.json", event);
   };
   return (
     <div className="create-event">
