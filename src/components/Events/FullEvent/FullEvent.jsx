@@ -18,7 +18,12 @@ function FullEvent() {
       {isLoading ? (
         <Preloader />
       ) : (
-        <div className="fullEvent">{data.nameEvent}</div>
+        <div className="fullEvent">
+          <h3>{data.nameEvent}</h3>
+          <div className="fullEvent__date">
+            Дата {data.startTime} / {data.endTime}
+          </div>
+        </div>
       )}
     </div>
   );
