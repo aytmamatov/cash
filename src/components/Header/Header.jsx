@@ -43,7 +43,7 @@ function Header() {
             <Link to="/language" className="header__link">
               Язык
             </Link>
-            <button className="btn btn-primary">Sign in</button>
+            <button className="btn btn-primary">Войти</button>
           </div>
         </div>
       </div>
