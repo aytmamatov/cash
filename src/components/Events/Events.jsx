@@ -25,7 +25,7 @@ function Events() {
       <div className="events__main">
         {isLoading ? (
           <Preloader title="Загрузка мероприятий" />
-        ) : (
+        ) : !!events ? (
           Object.keys(events).map((event) => {
             return (
               <Card key={event} className="event">
@@ -47,6 +47,8 @@ function Events() {
               </Card>
             );
           })
+        ) : (
+          <span>К сожалению мероприятий нету</span>
         )}
       </div>
     </div>

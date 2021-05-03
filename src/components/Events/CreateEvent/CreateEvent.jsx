@@ -46,18 +46,18 @@ const EventForm = ({ handleSubmit }) => {
 };
 const EventReduxForm = reduxForm({ form: "eventForm" })(EventForm);
 function CreateEvent() {
-  const [event, setEvent] = useState({
+  const userData = {
     nameEvent: "",
     startTime: "",
     endTime: "",
     status: "active",
     numberEvent: 0,
-  });
+  };
   const dispatch = useDispatch();
   const saveForm = (values) => {
-    setEvent({ ...event, ...values });
-    dispatch({ type: SEND_EVENT, values });
-    return () => instance.post("/events.json", event);
+    const userExtendedData = { ...userData, ...values };
+    dispatch({ type: SEND_EVENT, userExtendedData });
+    instance.post("/events.json", userExtendedData);
   };
   return (
     <div className="create-event">

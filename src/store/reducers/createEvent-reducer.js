@@ -4,14 +4,13 @@ const initialState = {
   nameEvent: "",
   startTime: "",
   endTime: "",
-  status: "",
+  status: "active",
   numberEvent: 0,
 };
 const createEventReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEND_EVENT:
-      return { ...state, ...action.event };
-
+      return { ...state, ...action.userExtendedData };
     default:
       return state;
   }
