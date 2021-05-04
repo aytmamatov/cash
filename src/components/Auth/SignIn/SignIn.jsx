@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./SignUp.sass";
+import "./SignIn.sass";
 
-function SignUp({ isAuth, setIsAuth }) {
+function SignIn({ isAuth, setIsAuth }) {
   return (
-    <div className="signUp">
+    <div className="signIn">
       <form>
-        <h3 className="mb-3">Регистрация</h3>
+        <h3 className="mb-3">Войти</h3>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Электронная почта
@@ -30,17 +30,6 @@ function SignUp({ isAuth, setIsAuth }) {
             placeholder="Введите пароль"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Повторите пароль
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            placeholder="Повторите пароль"
-          />
-        </div>
         <div className="auth-flex">
           <button type="submit" className="btn btn-primary">
             Отправить
@@ -60,4 +49,4 @@ function SignUp({ isAuth, setIsAuth }) {
   );
 }
 
-export default SignUp;
+export default SignIn;

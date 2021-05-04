@@ -5,16 +5,18 @@ import CreateEvent from "./components/Events/CreateEvent/CreateEvent";
 import Events from "./components/Events/Events";
 import FullEvent from "./components/Events/FullEvent/FullEvent";
 import Header from "./components/Header/Header";
-import './components/Auth/Auth.sass'
+import "./components/Auth/Auth.sass";
 import "./sass/base.sass";
-import SignUp from "./components/Auth/SignUp/SignUp";
-
-
+import Auth from "./components/Auth/Auth";
 function App() {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      user ? setIsLoadingUser(true) : setIsLoadingUser(false);
+      if (user) {
+        setIsLoadingUser(true);
+      } else {
+        setIsLoadingUser(false);
+      }
     });
   }, []);
   return (
@@ -30,9 +32,7 @@ function App() {
             </Switch>
           </>
         ) : (
-          <div className="auth">
-            <SignUp />
-          </div>
+          <Auth />
         )}
       </div>
     </div>
