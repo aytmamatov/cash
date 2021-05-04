@@ -9,9 +9,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import createEventReducer from "./store/reducers/createEvent-reducer";
 import { reducer as formReducer } from "redux-form";
+import authReducer from "./store/reducers/auth-reducer";
 
 const rootReducer = combineReducers({
   createEvent: createEventReducer,
+  auth: authReducer,
   form: formReducer,
 });
 
