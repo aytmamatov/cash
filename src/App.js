@@ -15,6 +15,7 @@ function App() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log(user);
         setisLoadingPreloader(false);
       } else {
         setisLoadingPreloader(true);
