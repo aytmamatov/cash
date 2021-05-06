@@ -8,21 +8,30 @@ import Header from "./components/Header/Header";
 import "./components/Auth/Auth.sass";
 import "./sass/base.sass";
 import Auth from "./components/Auth/Auth";
+import Preloader from "./components/UI/Preloader/Preloader";
 function App() {
-  const [isLoadingUser, setIsLoadingUser] = useState(false);
+  const [isLoadingUser, setisLoadingUser] = useState(false);
+  const [isLoadingPreloader, setisLoadingPreloader] = useState(true);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        setIsLoadingUser(true);
+        setisLoadingPreloader(false);
       } else {
-        setIsLoadingUser(false);
+        setisLoadingPreloader(true);
+        setisLoadingUser(true);
       }
     });
   }, []);
   return (
     <div className="App">
       <div className="container">
-        {isLoadingUser ? (
+        {isLoadingPreloader ? (
+          isLoadingUser ? (
+            <Auth />
+          ) : (
+            <Preloader className="preloader__minh100" />
+          )
+        ) : (
           <>
             <Header />
             <Switch>
@@ -31,8 +40,6 @@ function App() {
               <Route exact path="/events" component={Events}></Route>
             </Switch>
           </>
-        ) : (
-          <Auth />
         )}
       </div>
     </div>
