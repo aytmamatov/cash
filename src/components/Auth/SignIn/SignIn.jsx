@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react-dom";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { SIGN_IN_REDUX } from "../../../store/reducers/auth-reducer";
+import Preloader from "../../UI/Preloader/Preloader";
 import firebase from "./../../../config/fbConfig";
 import "./SignIn.sass";
 
-function SignInForm({ isAuth, setIsAuth, handleSubmit }) {
+function SignInForm({ isAuth, setIsAuth, handleSubmit, isLoadingError }) {
   return (
     <div className="signIn">
       <form onSubmit={handleSubmit}>
-        <h3 className="mb-3">Войти</h3>
+        <div className="signIn__flex">
+          <h3>Войти</h3>
+          {isLoadingError ? <span className="signIn__error-title" >Пользователь не найден</span> : null}
+        </div>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Электронная почта
@@ -60,18 +63,31 @@ function SignInForm({ isAuth, setIsAuth, handleSubmit }) {
 }
 const SignInFormRedux = reduxForm({ form: "signInForm" })(SignInForm);
 const SignIn = ({ isAuth, setIsAuth }) => {
+  const [isLoadingSending, setisLoadingSending] = useState(false);
+  const [isLoadingError, setisLoadingError] = useState(false);
   const dispatch = useDispatch();
   const sendForm = (data) => {
+    setisLoadingSending(true);
     firebase
       .auth()
       .signInWithEmailAndPassword(data.email, data.password)
-      .then(() => dispatch({ type: SIGN_IN_REDUX, data }));
+      .then(() => {
+        setisLoadingSending(false);
+        dispatch({ type: SIGN_IN_REDUX, data });
+      })
+      .catch((error) => {
+        setisLoadingSending(false);
+        setisLoadingError(true);
+      });
   };
-  return (
+  return isLoadingSending ? (
+    <Preloader />
+  ) : (
     <SignInFormRedux
       onSubmit={sendForm}
       isAuth={isAuth}
       setIsAuth={setIsAuth}
+      isLoadingError={isLoadingError}
     />
   );
 };
