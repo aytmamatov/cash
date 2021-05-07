@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import firebase from "./config/fbConfig";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import CreateEvent from "./components/Events/CreateEvent/CreateEvent";
 import Events from "./components/Events/Events";
 import FullEvent from "./components/Events/FullEvent/FullEvent";
@@ -10,13 +10,14 @@ import "./sass/base.sass";
 import Auth from "./components/Auth/Auth";
 import Preloader from "./components/UI/Preloader/Preloader";
 function App() {
+  const history = useHistory();
   const [isLoadingUser, setisLoadingUser] = useState(false);
   const [isLoadingPreloader, setisLoadingPreloader] = useState(true);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(user);
         setisLoadingPreloader(false);
+        history.push("/events");
       } else {
         setisLoadingPreloader(true);
         setisLoadingUser(true);

@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { NavDropdown } from "react-bootstrap";
+import { Button, NavDropdown } from "react-bootstrap";
+import firebase from "./../../config/fbConfig";
 import "./Header.sass";
 function Header() {
+  const [isExistUser, setIsExistUser] = useState(false);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setIsExistUser(true);
+      }
+    });
+  }, []);
+  const logOutHandler = () => firebase.auth().signOut();
   return (
     <div className="header">
       <div className="container">
@@ -43,7 +54,11 @@ function Header() {
             <Link to="/language" className="header__link">
               Язык
             </Link>
-            <button className="btn btn-primary">Войти</button>
+            {isExistUser && (
+              <Button onClick={logOutHandler} variant="danger">
+                Выйти
+              </Button>
+            )}
           </div>
         </div>
       </div>
