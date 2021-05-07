@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { Field, reduxForm } from "redux-form";
 import { instance } from "../../../api/api";
 import { SEND_EVENT } from "./../../../store/reducers/createEvent-reducer";
@@ -46,6 +47,7 @@ const EventForm = ({ handleSubmit }) => {
 };
 const EventReduxForm = reduxForm({ form: "eventForm" })(EventForm);
 function CreateEvent() {
+  const history = useHistory();
   const userData = {
     nameEvent: "",
     startTime: "",
@@ -57,7 +59,9 @@ function CreateEvent() {
   const saveForm = (values) => {
     const userExtendedData = { ...userData, ...values };
     dispatch({ type: SEND_EVENT, userExtendedData });
-    instance.post("/events.json", userExtendedData);
+    instance.post("/events.json", userExtendedData).then(() => {
+      history.push('/events')
+    });
   };
   return (
     <div className="create-event">
